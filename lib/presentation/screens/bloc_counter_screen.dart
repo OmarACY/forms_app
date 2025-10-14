@@ -20,14 +20,23 @@ class BlocCounterView extends StatelessWidget {
     );
   }
 
+  void counterReset(BuildContext context) {
+    context.read<CounterBloc>().add(
+       CounterReset()
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bloc Counter 0'),
+        title: context.select(
+          (CounterBloc bloc) =>
+              Text('Bloc Counter: ${bloc.state.transactionCount}'),
+        ),
         actions: [
           IconButton(
-            onPressed: () => {},
+            onPressed: () => counterReset(context),
             icon: const Icon(Icons.refresh_outlined),
           ),
         ],
