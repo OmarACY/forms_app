@@ -6,9 +6,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Nuevo usuario'),
-      ),
+      appBar: AppBar(title: Text('Nuevo usuario')),
       body: const _RegisterView(),
     );
   }
@@ -19,6 +17,27 @@ class _RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FlutterLogo( size: 100,),
+              TextFormField(),
+              TextFormField(),
+              TextFormField(),
+              TextFormField(),
+              const SizedBox(height: 20),
+              FilledButton.tonalIcon(
+                onPressed: (){},
+                icon: Icon(Icons.save),
+               label: Text('Crear usuario')),
+              const SizedBox(height: 20),
+            ]),
+        ),
+      ),
+    );
   }
 }
