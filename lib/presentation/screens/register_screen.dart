@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:forms_app/infrastructure/inputs/inputs.dart';
 import 'package:forms_app/presentation/blocs/register/register_cubit.dart';
 import 'package:forms_app/presentation/widgets/widgets.dart';
 
@@ -49,8 +48,9 @@ class _RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerCubit = context.watch<RegisterCubit>();
     final username = registerCubit.state.username;
+    final email = registerCubit.state.email;
     final password = registerCubit.state.password;
-
+    
     return Form(
       child: Column(
         children: [
@@ -62,22 +62,8 @@ class _RegisterForm extends StatelessWidget {
           const SizedBox(height: 10),
           CustomTextFormField(
             label: 'Correo electronico',
-            onChanged: (value) {
-              registerCubit.emailChanged(value);
-            },
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Campo requerido';
-              }
-
-              final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-
-              if (!emailRegExp.hasMatch(value)) {
-                return 'No tiene formato de correo electronico';
-              }
-
-              return null;
-            },
+            onChanged: registerCubit.emailChanged,
+            errorMessage: email.errorMessage,
           ),
           const SizedBox(height: 10),
           CustomTextFormField(
